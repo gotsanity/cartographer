@@ -32,20 +32,37 @@ router.post('/posts/add', (req, res) => {
 		tags: req.body.tags
 	});
 
-	newPost.save(function(err) {
+	newPost.save(function(err, post) {
 		if (err) throw err;
-		res.status(200).send();
+		res.status(200).json(post);
 	});
 });
 
 // Get a single Post
 router.get('/posts/single/:id', (req, res) => {
-	res.status(501).send('Not Implemented Yet');
+	Post.findById(req.params.id, function(err, post) {
+		if (err) throw err;
+
+		res.status(200).json(post);
+	});
 });
 
 // Update a Post
 router.post('/posts/update/:id', (req, res) => {
-	res.status(501).send('Not Implemented Yet');
+	Post.findById(req.params.id, function(err, post) {
+		if (err) throw err;
+
+		post.title = req.body.title;
+		post.email = req.body.email;
+		post.author = req.body.author;
+		post.body = req.body.body;
+		post.tags = req.body.tags;
+
+		post.save(function(err, updatedPost) {
+			if (err) throw err;
+			res.status(200).json(updatedPost);
+		});
+	});
 });
 
 // Delete a Post
