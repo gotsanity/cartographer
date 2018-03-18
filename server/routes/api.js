@@ -34,8 +34,6 @@ router.post('/posts/add', (req, res) => {
 
 	newPost.save(function(err) {
 		if (err) throw err;
-
-		console.log('Post Added');
 		res.status(200).send();
 	});
 });
@@ -52,7 +50,16 @@ router.post('/posts/update/:id', (req, res) => {
 
 // Delete a Post
 router.post('/posts/delete/:id', (req, res) => {
-	res.status(501).send('Not Implemented Yet');
+	Post.findById(req.params.id, function(err, post) {
+		if (err) throw err;
+
+		post.remove(function(err) {
+			if (err) throw err;
+
+			console.log('Deleted post ' + req.params.id);
+			res.status(200).send('success');
+		});
+	});
 });
 
 module.exports = router;
