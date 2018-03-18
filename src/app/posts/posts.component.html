@@ -2,7 +2,7 @@
   <div class="row" *ngFor="let post of posts">
     <div class="card card-block">
       <h4 class="card-title">{{ post.title }}</h4>
-      <h5>Posted by: {{ post.author }} on {{ post.created_on }}</h5>
+      <h5>Posted by: {{ post.author }} on {{ post.created_on | date }}</h5>
       <p class="card-text">{{post.body}}</p>
       <a href="#" class="card-link">Card link</a>
       <a href="#" class="card-link">Another link</a>

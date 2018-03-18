@@ -13,4 +13,23 @@ export class PostsService {
     return this.http.get('/api/posts')
       .map(res => res.json());
   }
+
+	getSinglePost(id: String) {
+  	console.log('Getting a post with id: ' + id);
+    return this.http.get('/api/posts/single/' + id)
+      .map(res => res.json());
+  }
+
+  createPost() {
+  	console.log('Create post not implemented yet');
+  }
+
+  updatePost(id: String) {
+  	console.log('Update post not implemented yet');
+  }
+
+  deletePost(id: String) {
+  	console.log('Delete post not implemented yet');
+  }
+
 }
