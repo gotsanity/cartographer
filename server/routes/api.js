@@ -22,6 +22,15 @@ router.get('/posts', (req, res) => {
 	})
 });
 
+// Get a single Post
+router.get('/posts/single/:id', (req, res) => {
+	Post.findById(req.params.id, function(err, post) {
+		if (err) throw err;
+
+		res.status(200).json(post);
+	});
+});
+
 // Add a new Post
 router.post('/posts/add', (req, res) => {
 	var newPost = Post({
@@ -34,15 +43,6 @@ router.post('/posts/add', (req, res) => {
 
 	newPost.save(function(err, post) {
 		if (err) throw err;
-		res.status(200).json(post);
-	});
-});
-
-// Get a single Post
-router.get('/posts/single/:id', (req, res) => {
-	Post.findById(req.params.id, function(err, post) {
-		if (err) throw err;
-
 		res.status(200).json(post);
 	});
 });
