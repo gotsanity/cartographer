@@ -74,7 +74,7 @@ router.post('/posts/delete/:id', (req, res) => {
 			if (err) throw err;
 
 			console.log('Deleted post ' + req.params.id);
-			res.status(200).send('success');
+			res.status(200).json({ success: true });
 		});
 	});
 });

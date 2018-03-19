@@ -30,6 +30,8 @@ export class PostsService {
 
   deletePost(id: String) {
   	console.log('Delete post not implemented yet');
+    return this.http.post('/api/posts/delete/' + id)
+      .map(res => res.json());
   }
 
 }
