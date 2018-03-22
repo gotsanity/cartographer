@@ -15,7 +15,7 @@ export class PostsService {
   }
 
 	getSinglePost(id: String) {
-  	console.log('Getting a post with id: ' + id);
+		console.log(id);
     return this.http.get('/api/posts/single/' + id)
       .map(res => res.json());
   }
@@ -29,8 +29,7 @@ export class PostsService {
   }
 
   deletePost(id: String) {
-  	console.log('Delete post not implemented yet');
-    return this.http.post('/api/posts/delete/' + id)
+    return this.http.post('/api/posts/delete/' + id, {})
       .map(res => res.json());
   }
 

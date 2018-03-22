@@ -20,7 +20,7 @@ export class PostsComponent implements OnInit {
   }
 
   deletePost(id: String) {
-    this.postsService.deletePost(id: String).subscribe(post => {
+    this.postsService.deletePost(id).subscribe(post => {
       console.log(post);
       let index = this.posts.findIndex(p => p._id === id);
       this.posts.splice(index, 1);
@@ -28,6 +28,7 @@ export class PostsComponent implements OnInit {
   }
 
   viewPost(id: String) {
+    console.log(id);
     this.router.navigate(['/posts/' + id]);
   }
 

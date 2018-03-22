@@ -12,29 +12,16 @@ import { PostsComponent } from './posts/posts.component';
 
 import { PostsService } from './posts.service';
 import { PostDetailsComponent } from './postdetails/postdetails.component';
-
-// const ROUTES = [
-// 	{
-// 		path: '',
-// 		redirectTo: 'posts',
-// 		pathMatch: 'full'
-// 	},
-// 	{
-// 		path: 'posts',
-// 		component: PostsComponent
-// 	},
-//   {
-//     path: 'posts/:id',
-//     component: PostsComponent,
-//     outlet: 'single'
-//   }
-// ];
+import { HomeComponent } from './home/home.component';
+import { PostFormComponent } from './post-form/post-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostsComponent,
-    PostDetailsComponent
+    PostDetailsComponent,
+    HomeComponent,
+    PostFormComponent
   ],
   imports: [
     AppRoutingModule,
