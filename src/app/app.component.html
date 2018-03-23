@@ -1,6 +1,5 @@
-<h1>
-  {{title}}
-</h1>
-<router-outlet></router-outlet>
-<app-post-form></app-post-form>
-
+<app-navbar [title]="title"></app-navbar>
+<div id="outlet">
+  <div class="container"><router-outlet></router-outlet></div>
+</div>
+<app-footer [copyright]="copyright"></app-footer>
