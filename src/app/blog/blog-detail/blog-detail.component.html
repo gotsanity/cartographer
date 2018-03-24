@@ -1,0 +1,15 @@
+<h2>Blog Detail</h2>
+<form [formGroup]="blogForm">
+  <div class="form-group">
+    <label>Title:
+      <input class="form-control" formControlName="title">
+    </label>
+  </div>
+  <div class="form-group">
+    <label>Body:
+      <input class="form-control" formControlName="body">
+    </label>
+  </div>
+</form>
+<p>Values: {{ blogForm.value | json }}</p>
+<p>Values: {{ blogForm.status | json }}</p>

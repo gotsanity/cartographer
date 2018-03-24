@@ -26,9 +26,12 @@ router.get('/posts', (req, res) => {
 router.get('/posts/single/:id', (req, res) => {
 	Post.findById(req.params.id, function(err, post) {
 		if (err) throw err;
-
 		res.status(200).json(post);
 	});
+});
+
+router.get('/posts/single/', (req, res) => {
+	res.status(500).json();
 });
 
 // Add a new Post
