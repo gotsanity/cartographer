@@ -18,7 +18,8 @@
       </label>
     </div>
   </div> -->
-  <button type="submit" [disabled]="blogForm.pristine" class="btn btn-success">Save</button>
+  <button *ngIf="!id" type="button" (click)="createPost()" [disabled]="blogForm.pristine" class="btn btn-success">Create</button>
+  <button *ngIf="id" type="submit" [disabled]="blogForm.pristine" class="btn btn-success">Save</button>
 <button type="button" (click)="revert()" [disabled]="blogForm.pristine" class="btn btn-danger">Clear</button>
 </form>
 <p>Values: {{ blogForm.value | json }}</p>

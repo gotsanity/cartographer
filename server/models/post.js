@@ -4,7 +4,10 @@ const Schema = mongoose.Schema;
 var postSchema = new Schema({
 	title: String,
 	email: String,
-	author: String,
+	author: {
+		contact: String,
+		name: String
+	},
 	created_on: Date,
 	updated_on: Date,
 	body: String,

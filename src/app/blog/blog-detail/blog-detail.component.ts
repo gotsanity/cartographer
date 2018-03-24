@@ -55,6 +55,17 @@ export class BlogDetailComponent implements OnInit, OnChanges {
     });
   }
 
+  createPost() {
+    console.log('triggered a create');
+    this.blogPost = this.prepareSavePost();
+    this.blogService.createPost(this.blogPost).subscribe(post => {
+      console.log(post);
+      this.blogPost = new BlogPost(post);
+    });
+    this.rebuildForm();
+    this.isEditing = false;
+  }
+
   onSubmit() {
     console.log('triggered');
     this.blogPost = this.prepareSavePost();
@@ -67,6 +78,11 @@ export class BlogDetailComponent implements OnInit, OnChanges {
 
   prepareSavePost(): BlogPost {
     const formModel = this.blogForm.value;
+
+    this.blogPost.author = {
+      name: 'Gotsanity',
+      contact: 'facebook'
+    };
 
     const savePost: BlogPost = {
       _id: this.id as string,

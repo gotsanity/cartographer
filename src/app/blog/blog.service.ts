@@ -17,8 +17,7 @@ export class BlogService {
   getAllPosts(): Observable<BlogPost[]> {
   	console.log('Getting all BlogPosts');
     return this.http.get('/api/posts')
-      .map(res => res.json())
-      .catch((error:any) => Observable.throw(error.json().error || 'Server Error'));
+      .map(res => res.json());
   }
 
 	getSinglePost(id: String) {
@@ -27,8 +26,9 @@ export class BlogService {
       .map(res => res.json());
   }
 
-  createPost() {
-  	console.log('Create post not implemented yet');
+  createPost(post: BlogPost): Observable<BlogPost> {
+  	return this.http.post('/api/posts/add/', post)
+      .map(res => res.json());
   }
 
   updatePost(post: BlogPost): Observable<BlogPost> {

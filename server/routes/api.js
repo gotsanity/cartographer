@@ -36,10 +36,13 @@ router.get('/posts/single/', (req, res) => {
 
 // Add a new Post
 router.post('/posts/add', (req, res) => {
+	console.log(req.body);
 	var newPost = Post({
 		title: req.body.title,
-		email: req.body.email,
-		author: req.body.author,
+		author: {
+			name: req.body.author.name,
+			contact: req.body.author.contact,
+		},
 		body: req.body.body,
 		tags: req.body.tags
 	});
@@ -57,8 +60,10 @@ router.post('/posts/update/:id', (req, res) => {
 		if (err) throw err;
 
 		post.title = req.body.title;
-		post.author = req.body.author.name;
-		post.email = req.body.author.contact;
+		post.author = {
+			name: req.body.author.name,
+			contact: req.body.author.contact
+		};
 		post.body = req.body.body;
 		post.tags = req.body.tags;
 
