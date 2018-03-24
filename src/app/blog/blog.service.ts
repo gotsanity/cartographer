@@ -31,8 +31,10 @@ export class BlogService {
   	console.log('Create post not implemented yet');
   }
 
-  updatePost(id: String) {
-  	console.log('Update post not implemented yet');
+  updatePost(post: BlogPost): Observable<BlogPost> {
+  	console.log(post);
+    return this.http.post('/api/posts/update/' + post._id, post)
+      .map(res => res.json());
   }
 
   deletePost(id: String) {

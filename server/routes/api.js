@@ -53,11 +53,12 @@ router.post('/posts/add', (req, res) => {
 // Update a Post
 router.post('/posts/update/:id', (req, res) => {
 	Post.findById(req.params.id, function(err, post) {
+		console.log(req.body);
 		if (err) throw err;
 
 		post.title = req.body.title;
-		post.email = req.body.email;
-		post.author = req.body.author;
+		post.author = req.body.author.name;
+		post.email = req.body.author.contact;
 		post.body = req.body.body;
 		post.tags = req.body.tags;
 

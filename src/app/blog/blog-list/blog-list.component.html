@@ -1,17 +1,27 @@
 <h3 *ngIf="isLoading"><i>Loading...</i></h3>
-<h3 *ngIf="!isLoading">Blog Posts</h3>
+<div *ngIf="!isLoading">
+  <h3>Blog Posts</h3>
+  <button (click)="newPost()" class="btn btn-primary">New Post</button>
+</div>
+
+<div class="card" *ngIf="newBlogPost">
+  <div class="card-body">
+    <app-blog-detail [blogPost]="newBlogPost"></app-blog-detail>
+  </div>
+</div>
 
 <div class="card" *ngFor="let post of blogPosts | async">
   <!-- <img class="card-img-top" alt="Card image cap"> -->
   <div class="card-body">
-    <h3 class="card-title">{{post.title}}</h3>
-    <h6 class="card-subtitle mb-2 text-muted">By: {{post.author}}</h6>
-    <h6 class="card-subtitle mb-2 text-muted">Posted on: {{post.updated_on | date }}</h6>
-    <p class="card-text">{{post.body}}</p>
-    <a class="btn btn-primary" (click)="select(post)">Edit</a>
+    <div *ngIf="!selectedBlogPost || selectedBlogPost._id != post._id">
+      <h3 class="card-title">{{post.title}}</h3>
+      <h6 class="card-subtitle mb-2 text-muted">By: {{post.author}}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">Posted on: {{post.updated_on | date }}</h6>
+      <p class="card-text">{{post.body}}</p>
+      <a class="btn btn-primary" (click)="select(post)">Edit</a>
+    </div>
+    <div *ngIf="selectedBlogPost && selectedBlogPost._id == post._id">
+      <app-blog-detail [blogPost]="selectedBlogPost" [id]="selectedBlogPost._id" [isEditing]="true"></app-blog-detail>
+    </div>
   </div>
-</div>
-
-<div *ngIf="selectedBlogPost">
-  <app-blog-detail [blogPost]="selectedBlogPost" [id]="selectedBlogPost._id"></app-blog-detail>
 </div>

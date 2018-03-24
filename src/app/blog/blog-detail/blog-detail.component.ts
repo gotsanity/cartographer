@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BlogPost } from '../models/blog';
+import { Author, BlogPost } from '../models/blog';
 import { BlogService } from '../blog.service';
 
 @Component({
@@ -10,9 +10,10 @@ import { BlogService } from '../blog.service';
 })
 export class BlogDetailComponent implements OnInit, OnChanges {
 
-  @Input() id: String = '';
+  @Input() id: String;
   blogForm: FormGroup;
   @Input() blogPost: BlogPost;
+  @Input() isEditing: boolean = false;
 
   constructor(private fb: FormBuilder, private blogService: BlogService) {
     this.createForm();
@@ -22,21 +23,25 @@ export class BlogDetailComponent implements OnInit, OnChanges {
     this.blogForm = this.fb.group({
       title: ['', Validators.required],
       body: ['', Validators.required],
-      tags: this.fb.array([]),
+      // tags: this.fb.array([]),
     });
   }
 
   ngOnInit() {
-    this.blogService.getSinglePost(this.id).subscribe(post => {
-      this.blogPost = new BlogPost(post);
-      console.log(this.blogPost);
+    if (this.id) {
+      this.blogService.getSinglePost(this.id).subscribe(post => {
+        this.blogPost = new BlogPost(post);
+        console.log(this.blogPost);
 
-      this.blogForm.patchValue({
-        title: this.blogPost.title,
-        body: this.blogPost.body,
-        tags: this.blogPost.tags
+        this.blogForm.patchValue({
+          title: this.blogPost.title,
+          body: this.blogPost.body,
+          // tags: this.blogPost.tags
+        });
       });
-    });
+    } else {
+      this.blogPost = new BlogPost();
+    }
   }
 
   ngOnChanges() {
@@ -49,5 +54,30 @@ export class BlogDetailComponent implements OnInit, OnChanges {
       body: this.blogPost.body
     });
   }
+
+  onSubmit() {
+    console.log('triggered');
+    this.blogPost = this.prepareSavePost();
+    this.blogService.updatePost(this.blogPost).subscribe(post => {
+      this.blogPost = new BlogPost(post);
+    });
+    this.rebuildForm();
+    this.isEditing = false;
+  }
+
+  prepareSavePost(): BlogPost {
+    const formModel = this.blogForm.value;
+
+    const savePost: BlogPost = {
+      _id: this.id as string,
+      title: formModel.title as string,
+      body: formModel.body as string,
+      author: this.blogPost.author as Author,
+    }
+
+    return savePost;
+  }
+
+  revert() { this.rebuildForm(); }
 
 }

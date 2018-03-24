@@ -15,6 +15,7 @@ export class BlogListComponent implements OnInit {
   blogPosts: Observable<BlogPost[]>;
   isLoading = false;
   selectedBlogPost: BlogPost;
+  newBlogPost: BlogPost;
 
   constructor(private blogService: BlogService) { }
 
@@ -27,8 +28,17 @@ export class BlogListComponent implements OnInit {
     this.blogPosts = this.blogService.getAllPosts()
                           .finally(() => this.isLoading = false);
     this.selectedBlogPost = undefined;
+    this.newBlogPost = undefined;
   }
 
-  select(blogPost: BlogPost) { this.selectedBlogPost = blogPost; }
+  select(blogPost: BlogPost) {
+    this.selectedBlogPost = blogPost;
+    this.newBlogPost = undefined;
+  }
+
+  newPost() { 
+    this.newBlogPost = new BlogPost();
+    this.selectedBlogPost = undefined;
+  }
 
 }

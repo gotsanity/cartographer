@@ -7,8 +7,18 @@ export class BlogPost {
   updated_on? = '';
   tags? = [];
 
-  constructor(post: any) {
-    console.log(post);
+  constructor(
+    post: any = {
+      _id: '',
+      title: '',
+      author: '',
+      email: '',
+      body: '',
+      created_on: '',
+      updated_on: '',
+      tags: []
+    })
+  {
     this._id = post._id;
     this.title = post.title;
     this.author = new Author({ name: post.author, contact: post.email });
