@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Author, BlogPost } from '../models/blog';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { FormArray, FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { BlogPost } from '../models/blog';
 import { BlogService } from '../blog.service';
 
 @Component({
@@ -8,11 +8,11 @@ import { BlogService } from '../blog.service';
   templateUrl: './blog-detail.component.html',
   styleUrls: ['./blog-detail.component.css']
 })
-export class BlogDetailComponent implements OnInit {
+export class BlogDetailComponent implements OnInit, OnChanges {
 
   @Input() id: String = '';
   blogForm: FormGroup;
-  blogPost: BlogPost;
+  @Input() blogPost: BlogPost;
 
   constructor(private fb: FormBuilder, private blogService: BlogService) {
     this.createForm();
@@ -21,7 +21,8 @@ export class BlogDetailComponent implements OnInit {
   createForm() {
     this.blogForm = this.fb.group({
       title: ['', Validators.required],
-      body: ['', Validators.required]
+      body: ['', Validators.required],
+      tags: this.fb.array([]),
     });
   }
 
@@ -32,8 +33,20 @@ export class BlogDetailComponent implements OnInit {
 
       this.blogForm.patchValue({
         title: this.blogPost.title,
-        body: this.blogPost.body
+        body: this.blogPost.body,
+        tags: this.blogPost.tags
       });
+    });
+  }
+
+  ngOnChanges() {
+    this.rebuildForm();
+  }
+
+  rebuildForm() {
+    this.blogForm.reset({
+      title: this.blogPost.title,
+      body: this.blogPost.body
     });
   }
 

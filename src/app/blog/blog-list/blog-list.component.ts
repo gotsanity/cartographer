@@ -12,7 +12,7 @@ import { BlogService } from '../blog.service';
 })
 
 export class BlogListComponent implements OnInit {
-  blogPosts;
+  blogPosts: Observable<BlogPost[]>;
   isLoading = false;
   selectedBlogPost: BlogPost;
 
@@ -24,7 +24,7 @@ export class BlogListComponent implements OnInit {
 
   getBlogPosts() {
     this.isLoading = true;
-    this.blogPosts = this.blogPosts.getAllPosts()
+    this.blogPosts = this.blogService.getAllPosts()
                           .finally(() => this.isLoading = false);
     this.selectedBlogPost = undefined;
   }

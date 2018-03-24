@@ -33,6 +33,11 @@ import { BlogListComponent } from './blog/blog-list/blog-list.component';
     HttpClientModule,
     HttpModule
   ],
+  exports: [
+    AppComponent,
+    BlogDetailComponent,
+    BlogListComponent
+  ],
   providers: [BlogService],
   bootstrap: [AppComponent]
 })

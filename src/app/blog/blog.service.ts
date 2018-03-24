@@ -4,6 +4,7 @@ import { of } from 'rxjs/observable/of';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/catch';
 
 import { BlogPost } from './models/blog'
 
@@ -16,7 +17,8 @@ export class BlogService {
   getAllPosts(): Observable<BlogPost[]> {
   	console.log('Getting all BlogPosts');
     return this.http.get('/api/posts')
-      .map(res => res.json());
+      .map(res => res.json())
+      .catch((error:any) => Observable.throw(error.json().error || 'Server Error'));
   }
 
 	getSinglePost(id: String) {

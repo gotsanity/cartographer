@@ -10,6 +10,13 @@
       <input class="form-control" formControlName="body">
     </label>
   </div>
+  <div formArrayName="tags" class="well well-lg">
+    <div class="form-group">
+      <label>Tags:
+        <input class="form-control" formControlName="0">
+      </label>
+    </div>
+  </div>
 </form>
 <p>Values: {{ blogForm.value | json }}</p>
 <p>Values: {{ blogForm.status | json }}</p>
