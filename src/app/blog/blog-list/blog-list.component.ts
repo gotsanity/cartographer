@@ -47,4 +47,9 @@ export class BlogListComponent implements OnInit {
 
   }
 
+  onEditPost(post: BlogPost) {
+    console.log('Editing post in list @id', post._id);
+    this.selectedBlogPost = post;
+  }
+
 }

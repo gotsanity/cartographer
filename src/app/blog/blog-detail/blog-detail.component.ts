@@ -15,6 +15,7 @@ export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
   @Input() blogPost: BlogPost;
   @Input() isEditing: boolean = false;
   @Output() onDeletePost: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onEditPost: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder, private blogService: BlogService) {
     this.createForm();
@@ -64,8 +65,9 @@ export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
     console.log('triggered a create');
     this.blogPost = this.prepareSavePost();
     this.blogService.createPost(this.blogPost).subscribe(post => {
-      console.log(post);
+      this.id = post._id;
       this.blogPost = new BlogPost(post);
+      console.log(this.blogPost);
     });
     this.rebuildForm();
     this.isEditing = false;
@@ -101,10 +103,24 @@ export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
 
   revert() { this.rebuildForm(); }
 
+  cancelEdit() {
+    this.rebuildForm();
+    this.isEditing = false;
+    if (!this.id) {
+      this.onDeletePost.emit(this.blogPost);
+    }
+  }
+
   deleteBlogPost() {
     console.log('Deleting post with id', this.id);
     this.blogService.deletePost(this.blogPost).subscribe(post => {
       this.onDeletePost.emit(this.blogPost);
     });
+  }
+
+  editPost() {
+    console.log('Editing post with id', this.blogPost);
+    this.isEditing = true;
+    this.onEditPost.emit(this.blogPost);
   }
 }

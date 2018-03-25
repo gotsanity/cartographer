@@ -5,14 +5,14 @@
 </div>
 
 <div *ngIf="newBlogPost">
-    <app-blog-detail [blogPost]="newBlogPost" [isEditing]="true" (onDeletePost)="onDeletePost($event)"></app-blog-detail>
+    <app-blog-detail [blogPost]="newBlogPost" [isEditing]="true" (onDeletePost)="onDeletePost($event)" (onEditPost)="onEditPost($event)"></app-blog-detail>
 </div>
 
 <div *ngFor="let post of blogPosts | async">
   <div *ngIf="!selectedBlogPost || selectedBlogPost._id != post._id">
-    <app-blog-detail [blogPost]="post" [id]="post._id" [isEditing]="false" (onDeletePost)="onDeletePost($event)"></app-blog-detail>
+    <app-blog-detail [blogPost]="post" [id]="post._id" [isEditing]="false" (onDeletePost)="onDeletePost($event)" (onEditPost)="onEditPost($event)"></app-blog-detail>
   </div>
   <div *ngIf="selectedBlogPost && selectedBlogPost._id == post._id">
-    <app-blog-detail [blogPost]="selectedBlogPost" [id]="selectedBlogPost._id" [isEditing]="true" (onDeletePost)="onDeletePost($event)"></app-blog-detail>
+    <app-blog-detail [blogPost]="selectedBlogPost" [id]="selectedBlogPost._id" [isEditing]="true" (onDeletePost)="onDeletePost($event)" (editPost)="onEditPost($event)"></app-blog-detail>
   </div>
 </div>

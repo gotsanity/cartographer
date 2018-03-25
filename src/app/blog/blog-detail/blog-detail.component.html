@@ -1,20 +1,18 @@
 <div class="card">
-  <div *ngIf="isEditing">
-  <h2>Blog Detail</h2>
-  <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label>Title:
-        <input class="form-control" formControlName="title">
-      </label>
-    </div>
-    <div class="form-group">
-      <label>Body:
-        <input class="form-control" formControlName="body">
-      </label>
-    </div>
-  </form>
-  <p>Values: {{ blogForm.value | json }}</p>
-  <p>Values: {{ blogForm.status | json }}</p>
+  <div *ngIf="isEditing" class="card-body">
+    <h2>Blog Detail</h2>
+    <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Title:
+          <input class="form-control" formControlName="title">
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Body:
+          <input class="form-control" formControlName="body">
+        </label>
+      </div>
+    </form>
   </div>
 
   <div *ngIf="!isEditing" class="card" (deletePost)="onDeletePost($event)">
@@ -29,8 +27,9 @@
 
   <div class="card-footer">
     <button *ngIf="!id" type="button" (click)="createPost()" [disabled]="blogForm.pristine" class="btn btn-success">Create</button>
-    <button *ngIf="id" type="submit" [disabled]="blogForm.pristine" class="btn btn-success">Save</button>
-    <button type="button" (click)="revert()" [disabled]="blogForm.pristine" class="btn btn-danger">Clear</button>
-    <button type="button" (click)="deleteBlogPost()" class="btn btn-danger">Delete</button>
+    <button *ngIf="id && !isEditing" type="button" (click)="editPost()" class="btn btn-success">Edit</button>
+    <button *ngIf="id && isEditing" type="button" [disabled]="blogForm.pristine" (click)="onSubmit()" class="btn btn-success">Save</button>
+    <button *ngIf="isEditing" type="button" (click)="cancelEdit()" class="btn btn-danger">Cancel</button>
+    <button *ngIf="id" type="button" (click)="deleteBlogPost()" class="btn btn-danger">Delete</button>
   </div>
 </div>
