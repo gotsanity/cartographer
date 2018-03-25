@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, OnDestroy, EventEmitter } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Author, BlogPost } from '../models/blog';
 import { BlogService } from '../blog.service';
@@ -8,12 +8,13 @@ import { BlogService } from '../blog.service';
   templateUrl: './blog-detail.component.html',
   styleUrls: ['./blog-detail.component.css']
 })
-export class BlogDetailComponent implements OnInit, OnChanges {
+export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() id: String;
   blogForm: FormGroup;
   @Input() blogPost: BlogPost;
   @Input() isEditing: boolean = false;
+  @Output() onDeletePost: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder, private blogService: BlogService) {
     this.createForm();
@@ -46,6 +47,10 @@ export class BlogDetailComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.rebuildForm();
+  }
+
+  ngOnDestroy() {
+    console.log('destroyed');
   }
 
   rebuildForm() {
@@ -96,4 +101,10 @@ export class BlogDetailComponent implements OnInit, OnChanges {
 
   revert() { this.rebuildForm(); }
 
+  deleteBlogPost() {
+    console.log('Deleting post with id', this.id);
+    this.blogService.deletePost(this.blogPost).subscribe(post => {
+      this.onDeletePost.emit(this.blogPost);
+    });
+  }
 }

@@ -37,8 +37,8 @@ export class BlogService {
       .map(res => res.json());
   }
 
-  deletePost(id: String) {
-    return this.http.post('/api/posts/delete/' + id, {})
+  deletePost(post: BlogPost): Observable<BlogPost> {
+    return this.http.post('/api/posts/delete/' + post._id, {})
       .map(res => res.json());
   }
 

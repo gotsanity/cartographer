@@ -1,37 +1,36 @@
-<div *ngIf="isEditing">
-<h2>Blog Detail</h2>
-<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label>Title:
-      <input class="form-control" formControlName="title">
-    </label>
-  </div>
-  <div class="form-group">
-    <label>Body:
-      <input class="form-control" formControlName="body">
-    </label>
-  </div>
-<!--   <div formArrayName="tags" class="well well-lg">
+<div class="card">
+  <div *ngIf="isEditing">
+  <h2>Blog Detail</h2>
+  <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label>Tags:
-        <input class="form-control" formControlName="tag">
+      <label>Title:
+        <input class="form-control" formControlName="title">
       </label>
     </div>
-  </div> -->
-  <button *ngIf="!id" type="button" (click)="createPost()" [disabled]="blogForm.pristine" class="btn btn-success">Create</button>
-  <button *ngIf="id" type="submit" [disabled]="blogForm.pristine" class="btn btn-success">Save</button>
-<button type="button" (click)="revert()" [disabled]="blogForm.pristine" class="btn btn-danger">Clear</button>
-</form>
-<p>Values: {{ blogForm.value | json }}</p>
-<p>Values: {{ blogForm.status | json }}</p>
-</div>
+    <div class="form-group">
+      <label>Body:
+        <input class="form-control" formControlName="body">
+      </label>
+    </div>
+  </form>
+  <p>Values: {{ blogForm.value | json }}</p>
+  <p>Values: {{ blogForm.status | json }}</p>
+  </div>
 
-<div *ngIf="!isEditing">
-<!-- <img class="card-img-top" alt="Card image cap"> -->
-  <div>
-    <h3 class="card-title">{{blogPost.title}}</h3>
-    <h6 class="card-subtitle mb-2 text-muted">By: {{blogPost.author.name}}</h6>
-    <h6 class="card-subtitle mb-2 text-muted">Posted on: {{blogPost.updated_on | date }}</h6>
-    <p class="card-text">{{blogPost.body}}</p>
+  <div *ngIf="!isEditing" class="card" (deletePost)="onDeletePost($event)">
+  <!-- <img class="card-img-top" alt="Card image cap"> -->
+    <div class="card-body">
+      <h3 class="card-title">{{blogPost.title}}</h3>
+      <h6 class="card-subtitle mb-2 text-muted">By: {{blogPost.author.name}}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">Posted on: {{blogPost.updated_on | date }}</h6>
+      <p class="card-text">{{blogPost.body}}</p>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <button *ngIf="!id" type="button" (click)="createPost()" [disabled]="blogForm.pristine" class="btn btn-success">Create</button>
+    <button *ngIf="id" type="submit" [disabled]="blogForm.pristine" class="btn btn-success">Save</button>
+    <button type="button" (click)="revert()" [disabled]="blogForm.pristine" class="btn btn-danger">Clear</button>
+    <button type="button" (click)="deleteBlogPost()" class="btn btn-danger">Delete</button>
   </div>
 </div>

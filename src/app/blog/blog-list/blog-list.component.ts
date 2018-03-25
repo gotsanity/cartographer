@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/finally';
 
@@ -39,6 +39,12 @@ export class BlogListComponent implements OnInit {
   newPost() { 
     this.newBlogPost = new BlogPost();
     this.selectedBlogPost = undefined;
+  }
+
+  onDeletePost(post: BlogPost) {
+    console.log('Deleting from list the post @id', post._id);
+    this.getBlogPosts();
+
   }
 
 }

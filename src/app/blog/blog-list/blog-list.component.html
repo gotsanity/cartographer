@@ -4,24 +4,15 @@
   <button (click)="newPost()" class="btn btn-primary">New Post</button>
 </div>
 
-<div class="card" *ngIf="newBlogPost">
-  <div class="card-body">
-    <app-blog-detail [blogPost]="newBlogPost" [isEditing]="true"></app-blog-detail>
-  </div>
+<div *ngIf="newBlogPost">
+    <app-blog-detail [blogPost]="newBlogPost" [isEditing]="true" (onDeletePost)="onDeletePost($event)"></app-blog-detail>
 </div>
 
-<div class="card" *ngFor="let post of blogPosts | async">
-  <!-- <img class="card-img-top" alt="Card image cap"> -->
-  <div class="card-body">
-    <div *ngIf="!selectedBlogPost || selectedBlogPost._id != post._id">
-      <h3 class="card-title">{{post.title}}</h3>
-      <h6 class="card-subtitle mb-2 text-muted">By: {{post.author.name}}</h6>
-      <h6 class="card-subtitle mb-2 text-muted">Posted on: {{post.updated_on | date }}</h6>
-      <p class="card-text">{{post.body}}</p>
-      <button class="btn btn-primary" (click)="select(post)">Edit</button>
-    </div>
-    <div *ngIf="selectedBlogPost && selectedBlogPost._id == post._id">
-      <app-blog-detail [blogPost]="selectedBlogPost" [id]="selectedBlogPost._id" [isEditing]="true"></app-blog-detail>
-    </div>
+<div *ngFor="let post of blogPosts | async">
+  <div *ngIf="!selectedBlogPost || selectedBlogPost._id != post._id">
+    <app-blog-detail [blogPost]="post" [id]="post._id" [isEditing]="false" (onDeletePost)="onDeletePost($event)"></app-blog-detail>
+  </div>
+  <div *ngIf="selectedBlogPost && selectedBlogPost._id == post._id">
+    <app-blog-detail [blogPost]="selectedBlogPost" [id]="selectedBlogPost._id" [isEditing]="true" (onDeletePost)="onDeletePost($event)"></app-blog-detail>
   </div>
 </div>
