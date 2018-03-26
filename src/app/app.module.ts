@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
+import { AuthenticationService } from './authentication.service';
 import { BlogService } from './blog/blog.service';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -38,7 +39,10 @@ import { BlogListComponent } from './blog/blog-list/blog-list.component';
     BlogDetailComponent,
     BlogListComponent
   ],
-  providers: [BlogService],
+  providers: [
+    AuthenticationService,
+    BlogService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
