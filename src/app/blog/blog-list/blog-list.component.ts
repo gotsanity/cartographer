@@ -42,14 +42,16 @@ export class BlogListComponent implements OnInit {
   }
 
   onDeletePost(post: BlogPost) {
-    console.log('Deleting from list the post @id', post._id);
     this.getBlogPosts();
 
   }
 
   onEditPost(post: BlogPost) {
-    console.log('Editing post in list @id', post._id);
     this.selectedBlogPost = post;
+  }
+
+  onCreatePost(post: BlogPost) {
+    this.getBlogPosts();
   }
 
 }

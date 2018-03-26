@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, OnChanges, OnDestroy, EventEmitter } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Author, BlogPost } from '../models/blog';
+import { Author, BlogPost, Image } from '../models/blog';
 import { BlogService } from '../blog.service';
 
 @Component({
@@ -14,8 +14,10 @@ export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
   blogForm: FormGroup;
   @Input() blogPost: BlogPost;
   @Input() isEditing: boolean = false;
+  @Input() spoilerImage: Image;
   @Output() onDeletePost: EventEmitter<any> = new EventEmitter<any>();
   @Output() onEditPost: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onCreatePost: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder, private blogService: BlogService) {
     this.createForm();
@@ -25,7 +27,11 @@ export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
     this.blogForm = this.fb.group({
       title: ['', Validators.required],
       body: ['', Validators.required],
-      // tags: this.fb.array([]),
+      spoiler_image: this.fb.group({
+        url: '',
+        alt: '',
+        caption: ''
+      }),
     });
   }
 
@@ -33,17 +39,19 @@ export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
     if (this.id) {
       this.blogService.getSinglePost(this.id).subscribe(post => {
         this.blogPost = new BlogPost(post);
-        console.log(this.blogPost);
+        this.spoilerImage = new Image(post.spoiler_image);
 
         this.blogForm.patchValue({
           title: this.blogPost.title,
           body: this.blogPost.body,
-          // tags: this.blogPost.tags
+          spoiler_image: this.blogPost.spoiler_image
         });
       });
     } else {
       this.blogPost = new BlogPost();
+      this.spoilerImage = new Image();
     }
+    console.log(this.blogPost);
   }
 
   ngOnChanges() {
@@ -51,30 +59,28 @@ export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('destroyed');
   }
 
   rebuildForm() {
     this.blogForm.reset({
       title: this.blogPost.title,
-      body: this.blogPost.body
+      body: this.blogPost.body,
+      spoiler_image: this.blogPost.spoiler_image
     });
   }
 
   createPost() {
-    console.log('triggered a create');
     this.blogPost = this.prepareSavePost();
     this.blogService.createPost(this.blogPost).subscribe(post => {
       this.id = post._id;
       this.blogPost = new BlogPost(post);
-      console.log(this.blogPost);
     });
     this.rebuildForm();
     this.isEditing = false;
+    this.onCreatePost.emit(this.blogPost);
   }
 
   onSubmit() {
-    console.log('triggered');
     this.blogPost = this.prepareSavePost();
     this.blogService.updatePost(this.blogPost).subscribe(post => {
       this.blogPost = new BlogPost(post);
@@ -86,16 +92,20 @@ export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
   prepareSavePost(): BlogPost {
     const formModel = this.blogForm.value;
 
+    // TODO: hook these two into the user and file storage subsystems
     this.blogPost.author = {
       name: 'Gotsanity',
       contact: 'facebook'
     };
+
+    // this.blogPost.spoiler_image = this.spoilerImage;
 
     const savePost: BlogPost = {
       _id: this.id as string,
       title: formModel.title as string,
       body: formModel.body as string,
       author: this.blogPost.author as Author,
+      spoiler_image: formModel.spoiler_image as Image,
     }
 
     return savePost;
@@ -112,14 +122,12 @@ export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   deleteBlogPost() {
-    console.log('Deleting post with id', this.id);
     this.blogService.deletePost(this.blogPost).subscribe(post => {
       this.onDeletePost.emit(this.blogPost);
     });
   }
 
   editPost() {
-    console.log('Editing post with id', this.blogPost);
     this.isEditing = true;
     this.onEditPost.emit(this.blogPost);
   }

@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 
 // Get all Posts
 router.get('/posts', (req, res) => {
-	Post.find({}, function(err, posts) {
+	Post.find({}).sort([['updated_on', -1]]).exec(function(err, posts) {
 		if (err) throw err;
 		console.log(posts);
 		res.status(200).json(posts);
@@ -42,6 +42,11 @@ router.post('/posts/add', (req, res) => {
 		author: {
 			name: req.body.author.name,
 			contact: req.body.author.contact,
+		},
+		spoiler_image: {
+			url: req.body.spoiler_image.url,
+			alt: req.body.spoiler_image.alt,
+			caption: req.body.spoiler_image.caption
 		},
 		body: req.body.body,
 		tags: req.body.tags

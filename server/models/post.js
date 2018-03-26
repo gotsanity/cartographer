@@ -8,6 +8,11 @@ var postSchema = new Schema({
 		contact: String,
 		name: String
 	},
+	spoiler_image: {
+		url: String,
+		alt: String,
+		caption: String
+	},
 	created_on: Date,
 	updated_on: Date,
 	body: String,

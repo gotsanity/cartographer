@@ -1,18 +1,32 @@
 <h3 *ngIf="isLoading"><i>Loading...</i></h3>
 <div *ngIf="!isLoading">
-  <h3>Blog Posts</h3>
-  <button (click)="newPost()" class="btn btn-primary">New Post</button>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="blogNavbar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="blog/">All</a>
+        </li>
+      </ul>
+      <button (click)="newPost()" class="btn btn-primary"><i class="fas fa-plus-square"></i> New</button>
+    </div>
+  </nav>
+  <br>
 </div>
 
-<div *ngIf="newBlogPost">
-    <app-blog-detail [blogPost]="newBlogPost" [isEditing]="true" (onDeletePost)="onDeletePost($event)" (onEditPost)="onEditPost($event)"></app-blog-detail>
-</div>
-
-<div *ngFor="let post of blogPosts | async">
-  <div *ngIf="!selectedBlogPost || selectedBlogPost._id != post._id">
-    <app-blog-detail [blogPost]="post" [id]="post._id" [isEditing]="false" (onDeletePost)="onDeletePost($event)" (onEditPost)="onEditPost($event)"></app-blog-detail>
+<div class="container">
+  <div *ngIf="newBlogPost">
+      <app-blog-detail [blogPost]="newBlogPost" [isEditing]="true" (onDeletePost)="onDeletePost($event)" (onEditPost)="onEditPost($event)" (onCreatePost)="onCreatePost($event)"></app-blog-detail>
+      <br>
   </div>
-  <div *ngIf="selectedBlogPost && selectedBlogPost._id == post._id">
-    <app-blog-detail [blogPost]="selectedBlogPost" [id]="selectedBlogPost._id" [isEditing]="true" (onDeletePost)="onDeletePost($event)" (editPost)="onEditPost($event)"></app-blog-detail>
+
+  <div class="card-columns">
+    <div *ngFor="let post of blogPosts | async">
+      <div *ngIf="!selectedBlogPost || selectedBlogPost._id != post._id">
+        <app-blog-detail [blogPost]="post" [id]="post._id" [isEditing]="false" (onDeletePost)="onDeletePost($event)" (onEditPost)="onEditPost($event)"></app-blog-detail>
+      </div>
+      <div *ngIf="selectedBlogPost && selectedBlogPost._id == post._id">
+        <app-blog-detail [blogPost]="selectedBlogPost" [id]="selectedBlogPost._id" [isEditing]="true" (onDeletePost)="onDeletePost($event)" (editPost)="onEditPost($event)"></app-blog-detail>
+      </div>
+    </div>
   </div>
 </div>

@@ -15,13 +15,11 @@ export class BlogService {
 
   // Get all posts from the API
   getAllPosts(): Observable<BlogPost[]> {
-  	console.log('Getting all BlogPosts');
     return this.http.get('/api/posts')
       .map(res => res.json());
   }
 
 	getSinglePost(id: String) {
-		console.log(id);
     return this.http.get('/api/posts/single/' + id)
       .map(res => res.json());
   }
@@ -32,7 +30,6 @@ export class BlogService {
   }
 
   updatePost(post: BlogPost): Observable<BlogPost> {
-  	console.log(post);
     return this.http.post('/api/posts/update/' + post._id, post)
       .map(res => res.json());
   }
