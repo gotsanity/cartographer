@@ -39,6 +39,7 @@ export class AuthenticationService {
     if (!this.token) {
       this.token = localStorage.getItem('shoelaces-token');
     }
+    console.log('getToken:', this.token);
     return this.token;
   }
 
@@ -75,18 +76,24 @@ export class AuthenticationService {
     if (method === 'post') {
       base = this.http.post(`/api/${type}`, user);
     } else {
-      base = this.http.get(`/api/${type}`, { headers: { Authroization: `Bearer ${this.getToken()}` }});
+      console.log('hit request');
+      base = this.http.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
 
     const request = base.pipe(
       map((data: TokenResponse) => {
-      if (data.token) {
-        this.saveToken(data.token);
-      }
-      return data;
-    }));
+        if (data.token) {
+          console.log('got data', data);
+          this.saveToken(data.token);
+        } else {
+          console.log('you broke it');
+        }
+        console.log('before return');
+        return data;
+      })
+    );
 
-    return request;  
+    return request;
   }
 
   public register(user: TokenPayload): Observable<any> {
@@ -98,6 +105,7 @@ export class AuthenticationService {
   }
 
   public profile(): Observable<any> {
+    console.log('hit profile service route');
     return this.request('get', 'profile');
   }
 }

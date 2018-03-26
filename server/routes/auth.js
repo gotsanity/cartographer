@@ -17,6 +17,6 @@ router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
 
 // Get UserID
-router.get('/profile/:user_id', auth, ctrlProfile.profileRead);
+router.get('/profile', auth, ctrlProfile.profileRead);
 
 module.exports = router;
