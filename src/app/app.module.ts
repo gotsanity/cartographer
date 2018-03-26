@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AuthenticationService } from './auth/authentication.service';
+import { AuthGuardService } from './auth/auth-guard.service';
 import { BlogService } from './blog/blog.service';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -47,6 +48,7 @@ import { ProfileComponent } from './auth/profile/profile.component';
   ],
   providers: [
     AuthenticationService,
+    AuthGuardService,
     BlogService
   ],
   bootstrap: [AppComponent]
