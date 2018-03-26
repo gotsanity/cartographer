@@ -9,13 +9,16 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService } from './auth/authentication.service';
 import { BlogService } from './blog/blog.service';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
+import { ProfileComponent } from './auth/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { BlogListComponent } from './blog/blog-list/blog-list.component';
     FooterComponent,
     BlogDetailComponent,
     BlogListComponent,
+    RegisterComponent,
+    LoginComponent,
+    ProfileComponent,
   ],
   imports: [
     AppRoutingModule,
