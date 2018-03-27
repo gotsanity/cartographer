@@ -4,6 +4,7 @@ import 'rxjs/add/operator/finally';
 
 import { BlogPost } from '../models/blog';
 import { BlogService } from '../blog.service';
+import { AuthenticationService, UserDetails } from '../../auth/authentication.service';
 
 @Component({
   selector: 'app-blog-list',
@@ -17,7 +18,7 @@ export class BlogListComponent implements OnInit {
   selectedBlogPost: BlogPost;
   newBlogPost: BlogPost;
 
-  constructor(private blogService: BlogService) { }
+  constructor(private blogService: BlogService, private auth: AuthenticationService) { }
 
   ngOnInit() {
     this.getBlogPosts();
@@ -37,7 +38,10 @@ export class BlogListComponent implements OnInit {
   }
 
   newPost() { 
-    this.newBlogPost = new BlogPost();
+    let newBlog = new BlogPost();
+    newBlog.author.name = this.auth.getUserDetails().display_name;
+    newBlog.author.contact = this.auth.getUserDetails().email;
+    this.newBlogPost = new BlogPost(newBlog);
     this.selectedBlogPost = undefined;
   }
 

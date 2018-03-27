@@ -9,6 +9,11 @@ var userSchema = new Schema({
 		unique: true,
 		required: true
 	},
+	display_name: {
+		type: String,
+		unique: true,
+		required: true
+	},
 	first_name: {
 		type: String,
 		required: true
@@ -40,6 +45,7 @@ userSchema.methods.generateJwt = function() {
 		email: this.email,
 		first_name: this.first_name,
 		last_name: this.last_name,
+		display_name: this.display_name,
 		exp: parseInt(expiry.getTime() / 1000),
 	}, process.env.SHOELACES_USER_SECRET_KEY);
 }

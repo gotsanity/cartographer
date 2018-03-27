@@ -13,6 +13,8 @@ export class LoginComponent {
 
   constructor(private auth: AuthenticationService, private router: Router) {}
 
+  // TODO: add more validation (all fields required, etc)
+
   login() {
     this.auth.login(this.credentials).subscribe(() => {
       this.router.navigateByUrl('/profile');

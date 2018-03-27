@@ -9,6 +9,7 @@ export interface UserDetails {
   email: string;
   first_name: string;
   last_name: string;
+  display_name: string;
   exp: number;
   iat: number;
 }
@@ -22,6 +23,7 @@ export interface TokenPayload {
   password: string;
   first_name?: string;
   last_name?: string;
+  display_name?: string;
 }
 
 @Injectable()
@@ -39,7 +41,6 @@ export class AuthenticationService {
     if (!this.token) {
       this.token = localStorage.getItem('shoelaces-token');
     }
-    console.log('getToken:', this.token);
     return this.token;
   }
 
@@ -83,12 +84,8 @@ export class AuthenticationService {
     const request = base.pipe(
       map((data: TokenResponse) => {
         if (data.token) {
-          console.log('got data', data);
           this.saveToken(data.token);
-        } else {
-          console.log('you broke it');
         }
-        console.log('before return');
         return data;
       })
     );
@@ -97,6 +94,7 @@ export class AuthenticationService {
   }
 
   public register(user: TokenPayload): Observable<any> {
+    console.log('moose', user);
     return this.request('post', 'register', user);
   }
 

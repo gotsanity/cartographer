@@ -19,4 +19,7 @@ router.post('/login', ctrlAuth.login);
 // Get UserID
 router.get('/profile', auth, ctrlProfile.profileRead);
 
+// Update User
+router.post('/profile', auth, ctrlProfile.profileUpdate);
+
 module.exports = router;
