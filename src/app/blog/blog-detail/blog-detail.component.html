@@ -1,5 +1,5 @@
 <div>
-  <div *ngIf="isEditing" class="card">
+  <div *ngIf="isEditing && isOwner()" class="card">
     <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
       <div class="card-header">
         <div class="form-group input-group">
@@ -56,15 +56,15 @@
     </div>
   
 
-    <div *ngIf="true" class="card-footer text-right">
+    <div *ngIf="isOwner()" class="card-footer text-right">
       <button *ngIf="id && !isEditing" type="button" (click)="editPost()" class="btn btn-sm btn-success"><i class="fas fa-pencil-alt"></i></button>
       <button *ngIf="id" type="button" (click)="deleteBlogPost()" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
-
+<!-- 
     <p>Values: {{ blogForm.value | json }}</p>
     <p>Values: {{ blogForm.status | json }}</p>
     <p>Values: {{ id | json }}</p>
     <p>Values: {{ isEditing | json }}</p>
-    <p>Values: {{ blogPost.spoiler_image | json }}</p>
+    <p>Values: {{ blogPost.spoiler_image | json }}</p> -->
     </div>
   </div>
 </div>

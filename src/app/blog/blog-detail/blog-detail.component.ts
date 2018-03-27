@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, OnChanges, OnDestroy, EventEmitter } 
 import { FormArray, FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Author, BlogPost, Image } from '../models/blog';
 import { BlogService } from '../blog.service';
+import { AuthenticationService, UserDetails } from '../../auth/authentication.service';
 
 @Component({
   selector: 'app-blog-detail',
@@ -19,7 +20,11 @@ export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
   @Output() onEditPost: EventEmitter<any> = new EventEmitter<any>();
   @Output() onCreatePost: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private fb: FormBuilder, private blogService: BlogService) {
+  constructor(
+      private fb: FormBuilder,
+      private blogService: BlogService,
+      private auth: AuthenticationService
+    ) {
     this.createForm();
   }
 
@@ -49,6 +54,12 @@ export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
       });
     } else {
       this.blogPost = new BlogPost();
+      if (this.auth.isLoggedIn()) {
+        this.blogPost.author = {
+          name: this.auth.getUserDetails().display_name,
+          contact: this.auth.getUserDetails().email
+        }
+      }
       this.spoilerImage = new Image();
     }
     console.log(this.blogPost);
@@ -93,12 +104,13 @@ export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
     const formModel = this.blogForm.value;
 
     // TODO: hook these two into the user and file storage subsystems
-    this.blogPost.author = {
-      name: 'Gotsanity',
-      contact: 'facebook'
-    };
-
-    // this.blogPost.spoiler_image = this.spoilerImage;
+    if (this.auth.isLoggedIn()) {
+      var userDetails = this.auth.getUserDetails();
+      this.blogPost.author = {
+        name: userDetails.display_name,
+        contact: userDetails.email
+      };
+    }
 
     const savePost: BlogPost = {
       _id: this.id as string,
@@ -109,6 +121,13 @@ export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     return savePost;
+  }
+
+  private isOwner() {
+    if (!this.auth.isLoggedIn()) {
+      return false;
+    }
+    return this.auth.getUserDetails().display_name == this.blogPost.author.name;
   }
 
   revert() { this.rebuildForm(); }

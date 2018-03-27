@@ -7,14 +7,16 @@
           <a class="nav-link" href="blog/">All</a>
         </li>
       </ul>
-      <button (click)="newPost()" class="btn btn-primary"><i class="fas fa-plus-square"></i> New</button>
+      <div *ngIf="auth.getUserDetails()?.display_name">
+        <button (click)="newPost()" class="btn btn-primary"><i class="fas fa-plus-square"></i> New</button>
+      </div>
     </div>
   </nav>
   <br>
 </div>
 
 <div class="container">
-  <div *ngIf="newBlogPost">
+  <div *ngIf="newBlogPost?.author.name">
       <app-blog-detail [blogPost]="newBlogPost" [isEditing]="true" (onDeletePost)="onDeletePost($event)" (onEditPost)="onEditPost($event)" (onCreatePost)="onCreatePost($event)"></app-blog-detail>
       <br>
   </div>
