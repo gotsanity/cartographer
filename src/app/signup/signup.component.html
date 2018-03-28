@@ -1,0 +1,14 @@
+<button *ngIf="isSignedUp" type="button" disabled class="btn btn-primary btn-lg">{{ buttonText }}</button>
+<button *ngIf="!isSignedUp" type="button" class="btn btn-primary btn-lg" (click)="openModal(signup)">{{ buttonText }}</button>
+
+<ng-template #signup>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Get Updated</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-signup-form (onContactSubmit)="onContactSubmit($event)" ></app-signup-form>
+  </div>
+</ng-template>

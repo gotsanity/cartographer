@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const axios = require('axios');
 const passport = require('passport');
+const morgan = require('morgan');
 
 // Mongo Connection
 mongoose.connect('mongodb://localhost/ocmean'); // TODO: add env variable for config
@@ -18,9 +19,12 @@ const passportConfig = require('./server/config/passport');
 // Get our API routes
 const api = require('./server/routes/api');
 const posts = require('./server/routes/posts');
+const contacts = require('./server/routes/contacts');
 const auth = require('./server/routes/auth');
 
 const app = express();
+
+app.use(morgan("common"));
 
 // Parsers for POST data
 app.use(bodyParser.json());
@@ -36,6 +40,7 @@ app.use(passport.initialize());
 app.use('/api', api);
 app.use('/api', auth);
 app.use('/api/posts', posts);
+app.use('/api/contacts', contacts);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

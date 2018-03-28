@@ -40,6 +40,7 @@ export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
+  // TODO: capture blog-list data instead of re-catching it from the api
   ngOnInit() {
     if (this.id) {
       this.blogService.getSinglePost(this.id).subscribe(post => {

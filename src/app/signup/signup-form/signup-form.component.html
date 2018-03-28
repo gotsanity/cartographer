@@ -1,0 +1,12 @@
+<form #signupForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" id="email" required [(ngModel)]="model.email" name="email">
+  </div>
+
+  <button type="submit" class="btn btn-success">Get Notified</button>
+</form>
