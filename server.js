@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const axios = require('axios');
 const passport = require('passport');
 const morgan = require('morgan');
+const jwt = require('jwt-simple');
 
 // Mongo Connection
 mongoose.connect('mongodb://localhost/ocmean'); // TODO: add env variable for config
@@ -26,6 +27,9 @@ const app = express();
 
 app.use(morgan("common"));
 
+// API Key Configs
+const validateApiAccess = require('./middleware/validate.api.access');
+
 // Parsers for POST data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -37,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'src')));
 app.use(passport.initialize());
 
 // Set our api routes
+app.all('/api/*', [require('./middleware/validate.api.access')]);
 app.use('/api', api);
 app.use('/api', auth);
 app.use('/api/posts', posts);
