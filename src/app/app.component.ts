@@ -6,10 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Shoelaces.js';
+  title = 'Development Derby';
   copyright = {
     name: 'Jesse Harlan',
-    address: 'http://developmentderby.com/profile/jesse.harlan',
+    address: '/contact',
     year: '2018'
   };
 }
