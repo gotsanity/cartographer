@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
+import { Headers, RequestOptions } from '@angular/http';
+import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { Router } from '@angular/router';
@@ -28,6 +30,7 @@ export interface TokenPayload {
 
 @Injectable()
 export class AuthenticationService {
+  // add authorization header with jwt token
   private token: string;
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -74,11 +77,18 @@ export class AuthenticationService {
   private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: TokenPayload): Observable<any> {
     let base;
 
+    let headers = {
+      headers: {
+        Authorization: `Bearer ${this.getToken()}`,
+        'X-Access-Token': environment.api_token
+      }
+    }
+
     if (method === 'post') {
-      base = this.http.post(`/api/${type}`, user);
+      base = this.http.post(`/api/${type}`, user, headers);
     } else {
       console.log('hit request');
-      base = this.http.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      base = this.http.get(`/api/${type}`, headers);
     }
 
     const request = base.pipe(

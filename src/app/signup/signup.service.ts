@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/map';
 
 import { ContactDetails } from './models/contact-details';
@@ -8,9 +9,8 @@ import { ContactDetails } from './models/contact-details';
 @Injectable()
 export class SignupService {
   // add authorization header with jwt token
-  headers = new Headers({ 'X-Access-Token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.H-JvvBncJA0DWVcACXhj5FfZ4hqlydR8MCVObuESoY8' });
+  headers = new Headers({ 'X-Access-Token': environment.api_token});
   options = new RequestOptions({ headers: this.headers });
-  test;
 
   constructor(private http: Http) { }
 
