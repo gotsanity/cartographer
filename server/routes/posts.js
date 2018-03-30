@@ -18,6 +18,15 @@ router.get('/', (req, res) => {
   })
 });
 
+// Get num recent posts
+router.get('/recent/:limit', (req, res) => {
+  Post.find({}).sort({'created_on': -1}).limit(parseInt(req.params.limit)).exec(function(err, posts) {
+    if (err) throw err;
+    console.log(posts);
+    res.status(200).json(posts);
+  })
+});
+
 // Get a single Post
 router.get('/single/:id', (req, res) => {
   Post.findById(req.params.id, function(err, post) {

@@ -1,0 +1,5 @@
+<div class="card-columns">
+  <div *ngFor="let post of blogPosts | async">
+    <app-blog-detail [blogPost]="post" [id]="post._id" [isEditing]="false" [textLimit]="300"></app-blog-detail>
+  </div>
+</div>

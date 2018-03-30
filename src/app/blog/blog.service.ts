@@ -23,6 +23,11 @@ export class BlogService {
       .map(res => res.json());
   }
 
+  getRecentPosts(num: number): Observable<BlogPost[]> {
+    return this.http.get('/api/posts/recent/' + num, this.options)
+      .map(res => res.json());
+  }
+
 	getSinglePost(id: String) {
     return this.http.get('/api/posts/single/' + id, this.options)
       .map(res => res.json());

@@ -11,6 +11,7 @@ import { AuthenticationService, UserDetails } from '../../auth/authentication.se
 })
 export class BlogDetailComponent implements OnInit, OnChanges, OnDestroy {
 
+  @Input() textLimit: number;
   @Input() id: String;
   blogForm: FormGroup;
   @Input() blogPost: BlogPost;

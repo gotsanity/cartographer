@@ -24,7 +24,7 @@
   <div class="card-columns">
     <div *ngFor="let post of blogPosts | async">
       <div *ngIf="!selectedBlogPost || selectedBlogPost._id != post._id">
-        <app-blog-detail [blogPost]="post" [id]="post._id" [isEditing]="false" (onDeletePost)="onDeletePost($event)" (onEditPost)="onEditPost($event)"></app-blog-detail>
+        <app-blog-detail [blogPost]="post" [id]="post._id" [isEditing]="false" (onDeletePost)="onDeletePost($event)" (onEditPost)="onEditPost($event)" [textLimit]="500"></app-blog-detail>
       </div>
       <div *ngIf="selectedBlogPost && selectedBlogPost._id == post._id">
         <app-blog-detail [blogPost]="selectedBlogPost" [id]="selectedBlogPost._id" [isEditing]="true" (onDeletePost)="onDeletePost($event)" (editPost)="onEditPost($event)"></app-blog-detail>
