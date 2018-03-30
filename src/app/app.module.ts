@@ -32,7 +32,6 @@ import { ProfileComponent } from './auth/profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupFormComponent } from './signup/signup-form/signup-form.component';
 import { BlogRecentComponent } from './blog/blog-recent/blog-recent.component';
-import { LimitTextPipe } from './limit-text.pipe';
 
 @NgModule({
   declarations: [
@@ -48,7 +47,6 @@ import { LimitTextPipe } from './limit-text.pipe';
     SignupComponent,
     SignupFormComponent,
     BlogRecentComponent,
-    LimitTextPipe,
   ],
   imports: [
     AppRoutingModule,
