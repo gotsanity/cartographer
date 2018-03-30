@@ -10,7 +10,7 @@ const morgan = require('morgan');
 const jwt = require('jwt-simple');
 
 // Mongo Connection
-mongoose.connect('mongodb://localhost/ocmean'); // TODO: add env variable for config
+mongoose.connect('mongodb://localhost/' + process.env.SHOELACES_DB); // TODO: add env variable for config
 const Post = require('./server/models/post');
 
 // Passport Configs
