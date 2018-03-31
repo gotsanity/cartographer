@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { environment } from '../environments/environment';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -42,7 +43,7 @@ import { SignupFormComponent } from './signup/signup-form/signup-form.component'
     HttpModule,
     CoreModule,
     BlogModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
   ],
   exports: [
     AppComponent,
@@ -51,7 +52,7 @@ import { SignupFormComponent } from './signup/signup-form/signup-form.component'
     AuthenticationService,
     AuthGuardService,
     BsModalService,
-    SignupService
+    SignupService,
   ],
   bootstrap: [AppComponent]
 })

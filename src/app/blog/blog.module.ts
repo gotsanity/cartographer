@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoreModule } from '../core/core.module';
+import { CoreModule } from 'app/core/core.module';
 import { BlogService } from './blog.service';
 import { BlogPost } from './models/blog';
 import { BlogRecentComponent } from './blog-recent/blog-recent.component';

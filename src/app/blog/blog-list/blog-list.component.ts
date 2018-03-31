@@ -4,7 +4,7 @@ import 'rxjs/add/operator/finally';
 
 import { BlogPost } from '../models/blog';
 import { BlogService } from '../blog.service';
-import { AuthenticationService, UserDetails } from '../../core/auth/authentication.service';
+import { AuthenticationService, UserDetails } from 'app/core/auth/authentication.service';
 
 @Component({
   selector: 'app-blog-list',

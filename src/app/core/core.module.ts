@@ -11,6 +11,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 
 import { CoreRoutingModule } from './core-routing.module';
+import { ModuleWithProviders } from '@angular/core';
 
 @NgModule({
   imports: [
@@ -38,4 +39,11 @@ import { CoreRoutingModule } from './core-routing.module';
     AuthGuardService
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: CoreModule,
+      providers: [AuthenticationService, AuthGuardService]
+    }
+  }
+}
