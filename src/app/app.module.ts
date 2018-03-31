@@ -6,13 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
+import { CoreModule } from './core/core.module';
 import { BlogModule } from './blog/blog.module';
 
 import { AppComponent } from './app.component';
 
 // Services
-import { AuthenticationService } from './auth/authentication.service';
-import { AuthGuardService } from './auth/auth-guard.service';
+import { AuthGuardService } from './core/auth/auth-guard.service';
+import { AuthenticationService } from './core/auth/authentication.service';
 import { SignupService } from './signup/signup.service';
 
 // ngx-bootstrap
@@ -22,11 +23,6 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 
 // Components
 import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { LoginComponent } from './auth/login/login.component';
-import { ProfileComponent } from './auth/profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupFormComponent } from './signup/signup-form/signup-form.component';
 
@@ -34,11 +30,6 @@ import { SignupFormComponent } from './signup/signup-form/signup-form.component'
   declarations: [
     AppComponent,
     HomeComponent,
-    NavbarComponent,
-    FooterComponent,
-    RegisterComponent,
-    LoginComponent,
-    ProfileComponent,
     SignupComponent,
     SignupFormComponent,
   ],
@@ -49,6 +40,7 @@ import { SignupFormComponent } from './signup/signup-form/signup-form.component'
     ReactiveFormsModule,
     HttpClientModule,
     HttpModule,
+    CoreModule,
     BlogModule,
     ModalModule.forRoot()
   ],

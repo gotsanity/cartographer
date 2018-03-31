@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CoreModule } from '../core/core.module';
 import { BlogService } from './blog.service';
 import { BlogPost } from './models/blog';
 import { BlogRecentComponent } from './blog-recent/blog-recent.component';
@@ -12,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    CoreModule,
   ],
   exports: [
     BlogRecentComponent,
@@ -24,7 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BlogDetailComponent,
   ],
   providers: [
-    BlogService
+    BlogService,
   ]
 })
 export class BlogModule { }

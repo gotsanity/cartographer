@@ -3,10 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { ProfileComponent } from './auth/profile/profile.component';
-import { AuthGuardService } from './auth/auth-guard.service';
+import { CoreModule } from './core/core.module';
+import { LoginComponent } from './core/auth/login/login.component';
+import { RegisterComponent } from './core/auth/register/register.component';
+import { ProfileComponent } from './core/auth/profile/profile.component';
+import { AuthGuardService } from './core/auth/auth-guard.service';
 
 const routes: Routes = [
 	{
