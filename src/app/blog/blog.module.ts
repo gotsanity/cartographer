@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlogRoutingModule } from './blog-routing.module';
 import { BlogSingleComponent } from './blog-single/blog-single.component';
 
+import { QuillModule } from 'ngx-quill';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import { BlogSingleComponent } from './blog-single/blog-single.component';
     ReactiveFormsModule,
     CoreModule,
     BlogRoutingModule,
+    QuillModule,
   ],
   exports: [
     BlogRecentComponent,

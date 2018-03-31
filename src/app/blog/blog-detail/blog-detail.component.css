@@ -2,6 +2,10 @@
   position: relative;
 }
 
-.more-link {
+/*.more-link {
   position:relative;
+}*/
+
+.card-img-overlay {
+  max-height: 200px;
 }
