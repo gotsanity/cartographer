@@ -10,10 +10,13 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 
+import { CoreRoutingModule } from './core-routing.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    CoreRoutingModule,
     ReactiveFormsModule
   ],
   exports: [

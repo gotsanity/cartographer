@@ -36,7 +36,7 @@
           {{ auth.getUserDetails()?.display_name || "Profile"}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a *ngIf="!auth.isLoggedIn()" class="dropdown-item" routerLink="core/login">Sign in</a>
+          <a *ngIf="!auth.isLoggedIn()" class="dropdown-item" routerLink="/login">Sign in</a>
           <a *ngIf="!auth.isLoggedIn()" class="dropdown-item" routerLink="/register">Register</a>
           <a *ngIf="auth.isLoggedIn()" class="dropdown-item" routerLink="/profile">{{ auth.getUserDetails()?.name || "Profile"}}</a>
           <a *ngIf="auth.isLoggedIn()" class="dropdown-item" (click)="auth.logout()">Logout</a>

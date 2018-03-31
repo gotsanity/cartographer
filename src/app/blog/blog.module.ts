@@ -8,12 +8,15 @@ import { BlogListComponent } from './blog-list/blog-list.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { BlogRoutingModule } from './blog-routing.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     CoreModule,
+    BlogRoutingModule,
   ],
   exports: [
     BlogRecentComponent,
