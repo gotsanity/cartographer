@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, OnChanges, OnDestroy, EventEmitter } 
 import { FormArray, FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Author, BlogPost, Image } from '../models/blog';
 import { BlogService } from '../blog.service';
-import { AuthenticationService, UserDetails } from '../../auth/authentication.service';
+import { AuthenticationService, UserDetails } from 'app/core/auth/authentication.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-blog-detail',
