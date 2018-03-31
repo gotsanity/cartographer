@@ -27,7 +27,7 @@
         </div>
         <div class="form-group">
           <label>Body:
-            <textarea class="form-control" formControlName="body"></textarea>
+            <quill-editor class="form-control" formControlName="body"></quill-editor>
           </label>
         </div>
       </div>
@@ -52,7 +52,7 @@
     <div class="card-body">
       <h6 class="card-subtitle mb-2 text-muted">By: {{blogPost.author.name}}</h6>
       <h6 class="card-subtitle mb-2 text-muted">Posted on: {{blogPost.updated_on | date:'full' }}</h6>
-      <p class="card-text">{{blogPost.body | slice:0:textLimit}}<span *ngIf="textLimit">... <a [routerLink]="['/blog', blogPost._id]" class="more-link">Read More</a></span></p>
+      <p class="card-text" [innerHTML]="blogPost.body | slice:0:textLimit"><span *ngIf="textLimit">... <a [routerLink]="['/blog', blogPost._id]" class="more-link">Read More</a></span></p>
     </div>
   
 

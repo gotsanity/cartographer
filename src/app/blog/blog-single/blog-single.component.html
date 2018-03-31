@@ -9,7 +9,7 @@
         <h3 class="mb-2 text-muted">By: {{blogPost.author.name}}</h3>
         <h3 class="mb-2 text-muted">Posted on: {{(blogPost.updated_on | date:'full')}}</h3>
       </div>
-      <div class="post-body">{{ blogPost.body}}</div>
+      <div class="post-body" [innerHTML]="blogPost.body"></div>
       <div class="post-footer"></div>
     </div>
   </div>

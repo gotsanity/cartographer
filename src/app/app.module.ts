@@ -26,6 +26,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupFormComponent } from './signup/signup-form/signup-form.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { SignupFormComponent } from './signup/signup-form/signup-form.component'
     CoreModule,
     BlogModule,
     ModalModule.forRoot(),
+    QuillModule
   ],
   exports: [
     AppComponent,
