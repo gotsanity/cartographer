@@ -1,3 +1,7 @@
 .card-footer button {
   position: relative;
 }
+
+.more-link {
+  position:relative;
+}

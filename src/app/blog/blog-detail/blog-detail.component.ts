@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup, FormBuilder, Validators } from '@ang
 import { Author, BlogPost, Image } from '../models/blog';
 import { BlogService } from '../blog.service';
 import { AuthenticationService, UserDetails } from 'app/core/auth/authentication.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-blog-detail',

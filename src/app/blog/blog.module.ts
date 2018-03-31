@@ -9,6 +9,7 @@ import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BlogRoutingModule } from './blog-routing.module';
+import { BlogSingleComponent } from './blog-single/blog-single.component';
 
 @NgModule({
   imports: [
@@ -21,12 +22,14 @@ import { BlogRoutingModule } from './blog-routing.module';
   exports: [
     BlogRecentComponent,
     BlogListComponent,
-    BlogDetailComponent
+    BlogDetailComponent,
+    BlogSingleComponent
   ],
   declarations: [
     BlogRecentComponent,
     BlogListComponent,
     BlogDetailComponent,
+    BlogSingleComponent,
   ],
   providers: [
     BlogService,

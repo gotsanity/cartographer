@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="post-header">
+        <div class="text-center">
+          <img src="{{blogPost.spoiler_image.url}}" class="img-fluid" alt="{{blogPost.spoiler_image.alt}}">
+        </div>
+        <h1>{{ blogPost.title}}</h1>
+        <h3 class="mb-2 text-muted">By: {{blogPost.author.name}}</h3>
+        <h3 class="mb-2 text-muted">Posted on: {{(blogPost.updated_on | date:'full')}}</h3>
+      </div>
+      <div class="post-body">{{ blogPost.body}}</div>
+      <div class="post-footer"></div>
+    </div>
+  </div>
+</div>
