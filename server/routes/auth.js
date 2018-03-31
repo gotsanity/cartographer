@@ -9,6 +9,14 @@ var auth = jwt({
 	userProperty: 'payload'
 });
 
+  var payload = {
+    key: process.env.SHOELACES_API_KEY
+  };
+  var secret = process.env.SHOELACES_API_SECRET;
+
+  var token = simpleJwt.encode(payload, secret);
+  console.log(token);
+
 var ctrlAuth = require('../controllers/authentication');
 var ctrlProfile = require('../controllers/profile');
 

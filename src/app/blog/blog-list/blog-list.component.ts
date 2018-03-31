@@ -47,7 +47,6 @@ export class BlogListComponent implements OnInit {
 
   onDeletePost(post: BlogPost) {
     this.getBlogPosts();
-
   }
 
   onEditPost(post: BlogPost) {
